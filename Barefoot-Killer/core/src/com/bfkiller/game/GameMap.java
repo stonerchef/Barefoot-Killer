@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.bfkiller.game;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import java.util.ArrayList;
