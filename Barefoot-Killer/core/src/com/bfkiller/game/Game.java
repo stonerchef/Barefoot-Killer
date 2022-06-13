@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.bfkiller.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.Input;
-public class MyGdxGame extends ApplicationAdapter {
+public class Game extends ApplicationAdapter {
 	ShapeRenderer shape;
 	OrthographicCamera camera;
 	GameMap map;
