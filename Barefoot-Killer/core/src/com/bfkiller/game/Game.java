@@ -2,6 +2,7 @@ package com.bfkiller.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.GL20;
@@ -19,8 +20,10 @@ public class Game extends ApplicationAdapter {
 		map = new GameMap();
 		player = new Player();
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		batch = new SpriteBatch();
 		camera.position.x = player.x;
 		camera.position.y = player.y;
+		player.player_img = new Texture("right.png");
 	}
 
 	@Override
