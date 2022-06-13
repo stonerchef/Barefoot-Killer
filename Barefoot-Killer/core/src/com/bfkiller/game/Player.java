@@ -2,6 +2,7 @@ package com.bfkiller.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Player {
@@ -10,6 +11,9 @@ public class Player {
     int y;
     int width;
     int height;
+    public Texture player_img;
+
+
 
     public Player(){
         movementSpeedPerSec = 480;
@@ -22,11 +26,13 @@ public class Player {
         double delta = Gdx.graphics.getDeltaTime();
         x -= delta*movementSpeedPerSec;
         camera.position.x = x;
+        player_img =  new Texture("left.png");
     }
     public void moveRight(OrthographicCamera camera){
         double delta = Gdx.graphics.getDeltaTime();
         x += delta*movementSpeedPerSec;
         camera.position.x = x;
+        player_img = new Texture("right.png");
     }
     public void moveUp(OrthographicCamera camera) {
         double delta = Gdx.graphics.getDeltaTime();
@@ -38,7 +44,5 @@ public class Player {
         y -= delta*movementSpeedPerSec;
         camera.position.y = y;
     }
-    public void draw(ShapeRenderer shape){
-        shape.rect(x, y, width, height);
-    }
+
 }

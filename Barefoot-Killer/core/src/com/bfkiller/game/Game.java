@@ -2,17 +2,17 @@ package com.bfkiller.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.Input;
 public class Game extends ApplicationAdapter {
-	int xd;
-	int xd2;
-	ShapeRenderer shape;
-	OrthographicCamera camera;
-	GameMap map;
-	Player player;
+	private ShapeRenderer shape;
+	private OrthographicCamera camera;
+	private GameMap map;
+	private Player player;
+	private SpriteBatch batch;
 	@Override
 	public void create () {
 		shape = new ShapeRenderer();
@@ -39,9 +39,14 @@ public class Game extends ApplicationAdapter {
 			player.moveDown(camera);
 		}
 		camera.update();
+
+		batch.setProjectionMatrix(camera.combined);
+		batch.begin();
+		batch.draw(player.player_img, player.x, player.y);
+		batch.end();
+
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 		shape.setProjectionMatrix(camera.combined);
-		player.draw(shape);
 		map.draw(shape);
 		shape.end();
 	}
