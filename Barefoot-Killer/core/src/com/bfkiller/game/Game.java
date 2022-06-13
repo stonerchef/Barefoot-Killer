@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.Input;
 public class Game extends ApplicationAdapter {
+	int xd;
 	ShapeRenderer shape;
 	OrthographicCamera camera;
 	GameMap map;

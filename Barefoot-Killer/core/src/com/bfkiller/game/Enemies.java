@@ -26,4 +26,3 @@ public class Enemies {
         shape.circle(posX, posY, size);
     }
 }
-}
