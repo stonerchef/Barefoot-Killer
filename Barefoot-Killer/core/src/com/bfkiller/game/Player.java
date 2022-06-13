@@ -26,13 +26,13 @@ public class Player {
         double delta = Gdx.graphics.getDeltaTime();
         x -= delta*movementSpeedPerSec;
         camera.position.x = x;
-        player_img =  new Texture("left.png");
+        player_img =  new Texture("left_player.png");
     }
     public void moveRight(OrthographicCamera camera){
         double delta = Gdx.graphics.getDeltaTime();
         x += delta*movementSpeedPerSec;
         camera.position.x = x;
-        player_img = new Texture("right.png");
+        player_img = new Texture("right_player.png");
     }
     public void moveUp(OrthographicCamera camera) {
         double delta = Gdx.graphics.getDeltaTime();

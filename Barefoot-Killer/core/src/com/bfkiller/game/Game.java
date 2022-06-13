@@ -23,7 +23,7 @@ public class Game extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		camera.position.x = player.x;
 		camera.position.y = player.y;
-		player.player_img = new Texture("right.png");
+		player.player_img = new Texture("right_player.png");
 	}
 
 	@Override
@@ -43,14 +43,15 @@ public class Game extends ApplicationAdapter {
 		}
 		camera.update();
 
+		map.draw(batch);
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		batch.draw(player.player_img, player.x, player.y);
 		batch.end();
 
+
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 		shape.setProjectionMatrix(camera.combined);
-		map.draw(shape);
 		shape.end();
 	}
 }
