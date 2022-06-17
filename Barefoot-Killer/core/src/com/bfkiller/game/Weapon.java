@@ -9,14 +9,20 @@ import com.badlogic.gdx.utils.Array;
 public class Weapon {
     private final TextureRegion weaponTexture;
     private Enemy target;
-    private final Rectangle hit_box;
+    public Rectangle hit_box;
+    public float angle;
 
-    public Weapon(Array<Enemy> Targets){
+    public Weapon(Array<Enemy> Targets, Player player){
         hit_box = new Rectangle();
         hit_box.width = 64;
         hit_box.height = 64;
         Texture weaponImage = new Texture("weapon.png");
         weaponTexture = new TextureRegion(weaponImage);
+        hit_box.x = player.hit_box.x + (float)1.5 * player.hit_box.width;
+        hit_box.y = player.hit_box.y + player.hit_box.height / 2;
+        target = getTarget(Targets);
+        angle = calculateAngle(player);
+
     }
 
     private Enemy getTarget(Array<Enemy> Targets){
@@ -32,7 +38,7 @@ public class Weapon {
         hit_box.x = player.hit_box.x + (float)1.5 * player.hit_box.width;
         hit_box.y = player.hit_box.y + player.hit_box.height / 2;
         target = getTarget(Targets);
-        float angle = calculateAngle(player);
+        angle = calculateAngle(player);
         batch.begin();
         batch.draw(weaponTexture, hit_box.x, hit_box.y,hit_box.width / 2, hit_box.height / 2  , hit_box.width, hit_box.height, 1, 1, angle);
         batch.end();
