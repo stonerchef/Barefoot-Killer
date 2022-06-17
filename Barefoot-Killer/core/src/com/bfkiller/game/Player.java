@@ -12,8 +12,6 @@ public class Player {
     private Texture player_img;
 
 
-
-
     public Player(){
         hit_box = new Rectangle();
         movementSpeedPerSec = 480;
