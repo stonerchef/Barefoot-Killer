@@ -14,6 +14,7 @@ public class Game extends ApplicationAdapter {
 	private GameMap map;
 	private Player player;
 	private SpriteBatch batch;
+	private Weapon weapon;
 	@Override
 	public void create () {
 		shape = new ShapeRenderer();
@@ -21,10 +22,12 @@ public class Game extends ApplicationAdapter {
 		player = new Player();
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch = new SpriteBatch();
-		camera.position.x = player.x;
-		camera.position.y = player.y;
-		player.player_img = new Texture("right_player.png");
+		camera.position.x = player.hit_box.x;
+		camera.position.y = player.hit_box.y;
+		weapon = new Weapon(map.Enemies);
 	}
+
+
 
 	@Override
 	public void render () {
@@ -42,12 +45,11 @@ public class Game extends ApplicationAdapter {
 			player.moveDown(camera);
 		}
 		camera.update();
+		batch.setProjectionMatrix(camera.combined);
+		player.draw(batch, player);
+		weapon.draw(batch, player, map.Enemies);
 
 		map.draw(batch);
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		batch.draw(player.player_img, player.x, player.y);
-		batch.end();
 
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
