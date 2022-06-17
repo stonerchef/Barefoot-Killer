@@ -24,7 +24,12 @@ public class Enemy {
     public void goToTarget(Player target){
         float delta = Gdx.graphics.getDeltaTime();
         double angle = Math.atan2(target.hit_box.y - this.hit_box.y, target.hit_box.x - this.hit_box.x);
-        this.hit_box.x += Math.cos(angle) * movementSpeedPreSec * delta;
+        double temp = Math.cos(angle) * movementSpeedPreSec * delta;
+
+        if(temp < 0){enemy_img =  new Texture("left_enemy.png");}
+        else {enemy_img =  new Texture("right_enemy.png");}
+
+        this.hit_box.x += temp;
         this.hit_box.y += Math.sin(angle) * movementSpeedPreSec * delta;
     }
 }

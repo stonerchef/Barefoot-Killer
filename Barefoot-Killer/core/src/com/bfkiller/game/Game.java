@@ -61,7 +61,7 @@ public class Game extends ApplicationAdapter {
 			bullet.draw(batch);
 		}
 
-		//map.updateEnemies(player);
+		map.updateEnemies(player);
 		map.draw(batch);
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);

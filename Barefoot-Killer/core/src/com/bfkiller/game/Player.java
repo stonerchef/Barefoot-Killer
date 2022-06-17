@@ -17,7 +17,7 @@ public class Player {
         movementSpeedPerSec = 480 / 2;
         hit_box.x = Gdx.graphics.getWidth()/2;
         hit_box.y = Gdx.graphics.getHeight()/2;
-        hit_box.width = 50;
+        hit_box.width = 80;
         hit_box.height = 100;
         player_img = new Texture("right_player.png");
     }
@@ -44,11 +44,9 @@ public class Player {
         hit_box.y -= delta*movementSpeedPerSec;
         camera.position.y = hit_box.y;
     }
-
     public void draw(SpriteBatch batch, Player player){
         batch.begin();
         batch.draw(player.player_img, hit_box.x, hit_box.y);
         batch.end();
     }
-
 }
