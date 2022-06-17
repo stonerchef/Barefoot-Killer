@@ -21,6 +21,7 @@ public class Player {
         hit_box.height = 100;
         player_img = new Texture("right_player.png");
     }
+
     public void moveLeft(OrthographicCamera camera) {
         double delta = Gdx.graphics.getDeltaTime();
         hit_box.x -= delta*movementSpeedPerSec;
