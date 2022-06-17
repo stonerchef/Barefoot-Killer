@@ -15,6 +15,7 @@ public class Game extends ApplicationAdapter {
 	private Player player;
 	private SpriteBatch batch;
 	private Weapon weapon;
+	private Bullet bullet;
 	@Override
 	public void create () {
 		shape = new ShapeRenderer();
@@ -24,7 +25,8 @@ public class Game extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		camera.position.x = player.hit_box.x;
 		camera.position.y = player.hit_box.y;
-		weapon = new Weapon(map.Enemies);
+		weapon = new Weapon(map.Enemies, player);
+		bullet = new Bullet(weapon, map.Enemies);
 	}
 
 
@@ -49,6 +51,7 @@ public class Game extends ApplicationAdapter {
 		batch.setProjectionMatrix(camera.combined);
 		player.draw(batch, player);
 		weapon.draw(batch, player, map.Enemies);
+		bullet.draw(batch);
 
 		map.updateEnemies(player);
 		map.draw(batch);
