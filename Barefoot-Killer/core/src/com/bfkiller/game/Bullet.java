@@ -21,8 +21,8 @@ public class Bullet {
         hit_box = new Rectangle();
         hit_box.height = 32;
         hit_box.width = 32;
-        hit_box.x = weapon.hit_box.x;
-        hit_box.y = weapon.hit_box.y;
+        hit_box.x = weapon.hit_box.x + weapon.hit_box.width / 2;
+        hit_box.y = weapon.hit_box.y + weapon.hit_box.height / 2;
         Texture bulletImage = new Texture("bullet.png");
         bulletTexture = new TextureRegion(bulletImage);
 
@@ -30,7 +30,7 @@ public class Bullet {
 
         angle = weapon.angle;
 
-        speed = 100;
+        speed = 2000;
         Direction();
     }
 
@@ -68,7 +68,7 @@ public class Bullet {
     public void draw(SpriteBatch batch){
         update();
         batch.begin();
-        batch.draw(bulletTexture, hit_box.x, hit_box.y,hit_box.width / 2, hit_box.height / 2  , hit_box.width, hit_box.height, 1, 1, angle);
+        batch.draw(bulletTexture, hit_box.x, hit_box.y,hit_box.width / 2, hit_box.height / 2  , hit_box.width, hit_box.height, 10, 10, angle);
         batch.end();
     }
 

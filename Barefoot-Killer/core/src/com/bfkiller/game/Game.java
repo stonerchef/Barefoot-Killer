@@ -18,6 +18,7 @@ public class Game extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private Weapon weapon;
 	private Array<Bullet> bullets;
+	private int timer = 0;
 	@Override
 	public void create () {
 		shape = new ShapeRenderer();
@@ -35,7 +36,10 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		bullets.add(new Bullet(weapon, map.Enemies));
+		if(timer == 10) {
+			bullets.add(new Bullet(weapon, map.Enemies));
+			timer = 0;
+		}
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		if(Gdx.input.isKeyPressed(Input.Keys.A)){
 			player.moveLeft(camera);
@@ -64,5 +68,6 @@ public class Game extends ApplicationAdapter {
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 		shape.setProjectionMatrix(camera.combined);
 		shape.end();
+		timer++;
 	}
 }
