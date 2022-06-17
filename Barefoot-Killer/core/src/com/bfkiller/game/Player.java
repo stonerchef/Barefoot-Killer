@@ -14,7 +14,7 @@ public class Player {
 
     public Player(){
         hit_box = new Rectangle();
-        movementSpeedPerSec = 480;
+        movementSpeedPerSec = 480 / 2;
         hit_box.x = Gdx.graphics.getWidth()/2;
         hit_box.y = Gdx.graphics.getHeight()/2;
         hit_box.width = 50;
