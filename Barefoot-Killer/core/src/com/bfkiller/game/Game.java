@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.utils.Array;
+
 public class Game extends ApplicationAdapter {
 	private ShapeRenderer shape;
 	private OrthographicCamera camera;
@@ -15,7 +17,7 @@ public class Game extends ApplicationAdapter {
 	private Player player;
 	private SpriteBatch batch;
 	private Weapon weapon;
-	private Bullet bullet;
+	private Array<Bullet> bullets;
 	@Override
 	public void create () {
 		shape = new ShapeRenderer();
@@ -26,13 +28,14 @@ public class Game extends ApplicationAdapter {
 		camera.position.x = player.hit_box.x;
 		camera.position.y = player.hit_box.y;
 		weapon = new Weapon(map.Enemies, player);
-		bullet = new Bullet(weapon, map.Enemies);
+		bullets = new Array<Bullet>();
 	}
 
 
 
 	@Override
 	public void render () {
+		bullets.add(new Bullet(weapon, map.Enemies));
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		if(Gdx.input.isKeyPressed(Input.Keys.A)){
 			player.moveLeft(camera);
@@ -51,7 +54,9 @@ public class Game extends ApplicationAdapter {
 		batch.setProjectionMatrix(camera.combined);
 		player.draw(batch, player);
 		weapon.draw(batch, player, map.Enemies);
-		bullet.draw(batch);
+		for(Bullet bullet : bullets){
+			bullet.draw(batch);
+		}
 
 		map.updateEnemies(player);
 		map.draw(batch);
