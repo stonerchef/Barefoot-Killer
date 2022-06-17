@@ -3,12 +3,13 @@ package com.bfkiller.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.MathUtils;
 
 import java.util.Random;
 
 public class Enemy {
     public Rectangle hit_box;
-    int movementSpeedPreSec;
+    float movementSpeedPreSec;
     public Texture enemy_img;
     public Enemy() {
         hit_box = new Rectangle();
@@ -23,19 +24,8 @@ public class Enemy {
 
     public void goToTarget(Player target){
         float delta = Gdx.graphics.getDeltaTime();
-
-        if(this.hit_box.x < target.hit_box.x){
-            this.hit_box.x += delta*this.movementSpeedPreSec;
-        }
-        else if (this.hit_box.x > target.hit_box.x) {
-            this.hit_box.x -= delta * this.movementSpeedPreSec;
-        }
-
-        if(this.hit_box.y < target.hit_box.y){
-            this.hit_box.y += delta*this.movementSpeedPreSec;
-        }
-        else if (this.hit_box.y > target.hit_box.y) {
-            this.hit_box.y -= delta*this.movementSpeedPreSec;
-        }
+        double angle = Math.atan2(target.hit_box.y - this.hit_box.y, target.hit_box.x - this.hit_box.x);
+        this.hit_box.x += Math.cos(angle) * movementSpeedPreSec * delta;
+        this.hit_box.y += Math.sin(angle) * movementSpeedPreSec * delta;
     }
 }
