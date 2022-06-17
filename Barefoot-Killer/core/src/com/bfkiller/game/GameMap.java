@@ -6,8 +6,13 @@ public class GameMap {
     public Array<Enemy> Enemies;
     public GameMap() {
         Enemies = new Array<>();
-        for(int i = 0; i < 1; i++){
+        for(int i = 0; i < 10; i++){
             Enemies.add(new Enemy());
+        }
+    }
+    public void  updateEnemies(Player target){
+        for (Enemy enemy : Enemies){
+            enemy.goToTarget(target);
         }
     }
     public void draw(SpriteBatch batch){

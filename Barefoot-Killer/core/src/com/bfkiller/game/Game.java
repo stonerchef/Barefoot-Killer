@@ -45,12 +45,13 @@ public class Game extends ApplicationAdapter {
 			player.moveDown(camera);
 		}
 		camera.update();
+
 		batch.setProjectionMatrix(camera.combined);
 		player.draw(batch, player);
 		weapon.draw(batch, player, map.Enemies);
 
+		//map.updateEnemies(player);
 		map.draw(batch);
-
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 		shape.setProjectionMatrix(camera.combined);
