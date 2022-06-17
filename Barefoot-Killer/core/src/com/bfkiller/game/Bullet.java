@@ -18,6 +18,7 @@ public class Bullet {
     private float angle;
 
     public Bullet(Weapon weapon, Array<Enemy> Targets){
+        target = weapon.getTarget(Targets);
         hit_box = new Rectangle();
         hit_box.height = 32;
         hit_box.width = 32;
@@ -25,19 +26,10 @@ public class Bullet {
         hit_box.y = weapon.hit_box.y + weapon.hit_box.height / 2;
         Texture bulletImage = new Texture("bullet.png");
         bulletTexture = new TextureRegion(bulletImage);
-
-        target = getTarget(Targets);
-
         angle = weapon.angle;
-
         speed = 2000;
         Direction();
     }
-
-    public Enemy getTarget(Array<Enemy> Targets){
-        return Targets.get(0);
-    }
-
     private void Direction(){
         float total_movement = 1;
         float x_distance = Math.abs(target.hit_box.x - hit_box.x);
@@ -71,5 +63,4 @@ public class Bullet {
         batch.draw(bulletTexture, hit_box.x, hit_box.y,hit_box.width / 2, hit_box.height / 2  , hit_box.width, hit_box.height, 10, 10, angle);
         batch.end();
     }
-
 }

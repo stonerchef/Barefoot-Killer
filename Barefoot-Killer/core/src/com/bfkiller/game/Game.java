@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Array;
-
 public class Game extends ApplicationAdapter {
 	private ShapeRenderer shape;
 	private OrthographicCamera camera;
@@ -57,12 +56,12 @@ public class Game extends ApplicationAdapter {
 
 		batch.setProjectionMatrix(camera.combined);
 		player.draw(batch, player);
-		weapon.draw(batch, player, map.Enemies);
+		weapon.draw(batch, map.Enemies);
 		for(Bullet bullet : bullets){
 			bullet.draw(batch);
 		}
 
-		map.updateEnemies(player);
+		//map.updateEnemies(player);
 		map.draw(batch);
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
