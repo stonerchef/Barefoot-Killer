@@ -82,23 +82,29 @@ public class Game extends ApplicationAdapter {
 			timer = 0;
 		}
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		if(Gdx.input.isKeyPressed(Input.Keys.A)){
+		if(Gdx.input.isKeyPressed(Input.Keys.A) && player.hit_box.x > map.hit_box.x){
 			player.moveLeft(camera);
 		}
-		if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+		if(Gdx.input.isKeyPressed(Input.Keys.D) && player.hit_box.x < map.hit_box.x + map.hit_box.width - player.hit_box.width) {
 			player.moveRight(camera);
 		}
-		if(Gdx.input.isKeyPressed(Input.Keys.W)){
+		if(Gdx.input.isKeyPressed(Input.Keys.W) && player.hit_box.y < map.hit_box.y + map.hit_box.height - player.hit_box.height){
 			player.moveUp(camera);
 		}
-		if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+		if(Gdx.input.isKeyPressed(Input.Keys.S) && player.hit_box.y > map.hit_box.y) {
 			player.moveDown(camera);
 		}
+
 		camera.update();
 
 		batch.setProjectionMatrix(camera.combined);
+
+		map.updateEnemies(player);
+		map.draw(batch);
+
 		player.draw(batch, player);
 		weapon.draw(batch, map.Enemies);
+
 		for(Bullet bullet : bullets){
 			bullet.draw(batch);
 		}
@@ -107,12 +113,9 @@ public class Game extends ApplicationAdapter {
 			item.draw(batch);
 		}
 
-		map.updateEnemies(player);
-		map.draw(batch);
-
-		shape.begin(ShapeRenderer.ShapeType.Filled);
-		shape.setProjectionMatrix(camera.combined);
-		shape.end();
+		//shape.begin(ShapeRenderer.ShapeType.Filled);
+		//shape.setProjectionMatrix(camera.combined);
+		//shape.end();
 		timer++;
 		hpBar.setValue(player.hpAcu / player.hpMax);
 		stage.draw();

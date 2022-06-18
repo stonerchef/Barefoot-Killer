@@ -33,7 +33,7 @@ public class Bullet {
         bulletTexture = new TextureRegion(bulletImage);
 
         angle = weapon.angle;
-        speed = 2000;
+        speed = 100;
         Direction();
     }
     private void Direction(){

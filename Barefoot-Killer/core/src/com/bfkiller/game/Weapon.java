@@ -53,7 +53,8 @@ public class Weapon {
             angle = calculateAngle();
         }
         batch.begin();
-        batch.draw(weaponTexture, hit_box.x, hit_box.y,hit_box.width / 2, hit_box.height / 2  , hit_box.width, hit_box.height, 1, 1, angle);
+        batch.draw(weaponTexture, hit_box.x, hit_box.y,hit_box.width / 2, hit_box.height / 2  ,
+                hit_box.width, hit_box.height, 1, 1, angle);
         batch.end();
     }
 }
