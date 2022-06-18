@@ -15,7 +15,7 @@ public class GameMap {
 
         int width = 1600;
         int heigth = 800;
-        hit_box = new Rectangle(-(width/2), -(heigth/2), width, heigth);
+        hit_box = new Rectangle(0, 0, width, heigth);
 
         Enemies = new Array<>();
         for(int i = 0; i < 5; i++){

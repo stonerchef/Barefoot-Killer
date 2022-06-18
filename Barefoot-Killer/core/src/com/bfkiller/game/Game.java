@@ -63,6 +63,7 @@ public class Game extends ApplicationAdapter {
 		}
 	}
 
+	@Override
 	public void resize(int width, int height) {
 		camera.viewportWidth = width;
 		camera.viewportHeight = height;
