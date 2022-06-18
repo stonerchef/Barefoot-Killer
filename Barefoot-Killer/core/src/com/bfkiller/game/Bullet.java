@@ -11,24 +11,25 @@ import java.awt.*;
 public class Bullet {
     private  TextureRegion bulletTexture;
     private Rectangle target;
-    private Rectangle hit_box;
+    public Rectangle hit_box;
     private float speed;
     private float x_velocity;
     private float y_velocity;
     private float angle;
 
     public Bullet(Weapon weapon, Array<Enemy> Targets){
+
         target = new Rectangle();
         target.x = weapon.getTarget(Targets).hit_box.x;
         target.y = weapon.getTarget(Targets).hit_box.y;
 
         hit_box = new Rectangle();
-        hit_box.height = 32;
-        hit_box.width = 32;
+        hit_box.height = 16;
+        hit_box.width = 16;
         hit_box.x = weapon.hit_box.x + weapon.hit_box.width / 2;
         hit_box.y = weapon.hit_box.y + weapon.hit_box.height / 2;
 
-        Texture bulletImage = new Texture("bullet.png");
+        Texture bulletImage = new Texture("hit_boxbullet.png");
         bulletTexture = new TextureRegion(bulletImage);
 
         angle = weapon.angle;
@@ -65,7 +66,9 @@ public class Bullet {
     public void draw(SpriteBatch batch){
         update();
         batch.begin();
-        batch.draw(bulletTexture, hit_box.x, hit_box.y,hit_box.width / 2, hit_box.height / 2  , hit_box.width, hit_box.height, 10, 10, angle);
+        batch.draw(bulletTexture, hit_box.x, hit_box.y,hit_box.width / 2, hit_box.height / 2  , hit_box.width, hit_box.height, 1, 1, angle);
         batch.end();
     }
+
+
 }

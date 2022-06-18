@@ -8,7 +8,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+
+import java.util.Iterator;
+
 public class Game extends ApplicationAdapter {
 	private ShapeRenderer shape;
 	private OrthographicCamera camera;
@@ -32,10 +36,22 @@ public class Game extends ApplicationAdapter {
 	}
 
 
+	public void kill(){
+		for(Bullet bullet : bullets){
+			for(Iterator<Enemy> iter = map.Enemies.iterator(); iter.hasNext();){
+				Enemy enemy = iter.next();
+				if(bullet.hit_box.overlaps(enemy.hit_box)) iter.remove();
+			}
+		}
+	}
+
 
 	@Override
 	public void render () {
-		if(timer == 10) {
+
+		kill();
+
+		if(timer == 10 && map.Enemies.notEmpty()) {
 			bullets.add(new Bullet(weapon, map.Enemies));
 			timer = 0;
 		}

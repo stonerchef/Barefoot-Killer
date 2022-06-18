@@ -21,8 +21,10 @@ public class Weapon {
         weaponTexture = new TextureRegion(weaponImage);
         hit_box.x = p.hit_box.x + (float)1.5 * p.hit_box.width;
         hit_box.y = p.hit_box.y + p.hit_box.height / 2;
-        target = getTarget(Targets);
-        angle = calculateAngle();
+        if(Targets.notEmpty()) {
+            target = getTarget(Targets);
+            angle = calculateAngle();
+        }
     }
     public Enemy getTarget(Array<Enemy> Targets){
         double val_min = Integer.MAX_VALUE;
@@ -46,8 +48,10 @@ public class Weapon {
     public void draw(SpriteBatch batch, Array<Enemy> Targets){
         hit_box.x = player.hit_box.x + (float)1.5 * player.hit_box.width;
         hit_box.y = player.hit_box.y + player.hit_box.height / 2;
-        target = getTarget(Targets);
-        angle = calculateAngle();
+        if(Targets.notEmpty()) {
+            target = getTarget(Targets);
+            angle = calculateAngle();
+        }
         batch.begin();
         batch.draw(weaponTexture, hit_box.x, hit_box.y,hit_box.width / 2, hit_box.height / 2  , hit_box.width, hit_box.height, 1, 1, angle);
         batch.end();
