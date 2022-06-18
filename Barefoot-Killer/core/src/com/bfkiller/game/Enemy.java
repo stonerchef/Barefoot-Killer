@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.MathUtils;
 import java.util.Random;
 
-public class Enemy {
+public class Enemy{
     public Rectangle hit_box;
     public Circle kolo;
     float movementSpeedPreSec;
@@ -18,8 +18,8 @@ public class Enemy {
         movementSpeedPreSec = 60;
         hit_box.width = 64;
         hit_box.height = 64;
-        hit_box.x = randInt.nextInt(Gdx.graphics.getWidth() * 2 ) - Gdx.graphics.getWidth() / 2;
-        hit_box.y = randInt.nextInt(Gdx.graphics.getHeight() * 2 ) - Gdx.graphics.getHeight() / 2;
+        hit_box.x = (float)randInt.nextInt(Gdx.graphics.getWidth() * 2 ) - Gdx.graphics.getWidth() / 2;
+        hit_box.y = (float)randInt.nextInt(Gdx.graphics.getHeight() * 2 ) - Gdx.graphics.getHeight() / 2;
         enemy_img = new Texture("left_enemy.png");
     }
 

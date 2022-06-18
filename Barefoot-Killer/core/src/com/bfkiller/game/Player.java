@@ -10,7 +10,8 @@ public class Player {
     private final float movementSpeedPerSec;
     public Rectangle hit_box;
     private Texture player_img;
-    int hp;
+    public float hpAcu;
+    public float hpMax;
 
 
     public Player(){
@@ -21,6 +22,8 @@ public class Player {
         hit_box.width = 64;
         hit_box.height = 64;
         player_img = new Texture("right_player.png");
+        hpAcu = 1.0f;
+        hpMax = 1.0f;
     }
 
     public void moveLeft(OrthographicCamera camera) {

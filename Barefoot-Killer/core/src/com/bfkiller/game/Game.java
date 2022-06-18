@@ -9,7 +9,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.Iterator;
 
@@ -22,6 +25,10 @@ public class Game extends ApplicationAdapter {
 	private Weapon weapon;
 	private Array<Bullet> bullets;
 	private int timer = 0;
+	private Stage stage;
+	private HpBar hpBar;
+	private Array<Item> items;
+
 	@Override
 	public void create () {
 		shape = new ShapeRenderer();
@@ -33,6 +40,14 @@ public class Game extends ApplicationAdapter {
 		camera.position.y = player.hit_box.y;
 		weapon = new Weapon(map.Enemies, player);
 		bullets = new Array<Bullet>();
+		items = new Array<Item>();
+
+		stage = new Stage();
+
+		hpBar = new HpBar(100, 10);
+		hpBar.setPosition(10, Gdx.graphics.getHeight() - 20);
+		stage.addActor(hpBar);
+
 	}
 
 
@@ -40,16 +55,27 @@ public class Game extends ApplicationAdapter {
 		for(Bullet bullet : bullets){
 			for(Iterator<Enemy> iter = map.Enemies.iterator(); iter.hasNext();){
 				Enemy enemy = iter.next();
-				if(bullet.hit_box.overlaps(enemy.hit_box)) iter.remove();
+				if(bullet.hit_box.overlaps(enemy.hit_box)){
+					items.add(new Item(enemy));
+					iter.remove();
+				}
 			}
 		}
+	}
+
+	public void resize(int width, int height) {
+		camera.viewportWidth = width;
+		camera.viewportHeight = height;
 	}
 
 
 	@Override
 	public void render () {
 
+		resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
 		kill();
+		player.hpAcu -= 0.0025f;
 
 		if(timer == 10 && map.Enemies.notEmpty()) {
 			bullets.add(new Bullet(weapon, map.Enemies));
@@ -77,6 +103,10 @@ public class Game extends ApplicationAdapter {
 			bullet.draw(batch);
 		}
 
+		for(Item item : items){
+			item.draw(batch);
+		}
+
 		map.updateEnemies(player);
 		map.draw(batch);
 
@@ -84,5 +114,8 @@ public class Game extends ApplicationAdapter {
 		shape.setProjectionMatrix(camera.combined);
 		shape.end();
 		timer++;
+		hpBar.setValue(player.hpAcu / player.hpMax);
+		stage.draw();
+		stage.act();
 	}
 }
