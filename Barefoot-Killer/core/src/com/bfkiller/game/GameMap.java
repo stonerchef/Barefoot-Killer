@@ -1,20 +1,24 @@
 package com.bfkiller.game;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import java.util.ArrayList;
+import com.badlogic.gdx.utils.Array;
 public class GameMap {
-    ArrayList<Enemies> monsters;
+    public Array<Enemy> Enemies;
     public GameMap() {
-        monsters = new ArrayList<>();
-        for(int i = 0; i < 20; i++){
-            monsters.add(new Enemies());
+        Enemies = new Array<>();
+        for(int i = 0; i < 5; i++){
+            Enemies.add(new Enemy());
+        }
+    }
+    public void  updateEnemies(Player target){
+        for (Enemy enemy : Enemies){
+            enemy.goToTarget(target);
         }
     }
     public void draw(SpriteBatch batch){
         batch.begin();
-        for (Enemies monster : monsters){
-            batch.draw(monster.enemy_img, monster.posX, monster.posY);
+        for (Enemy enemy : Enemies){
+            batch.draw(enemy.enemy_img, enemy.hit_box.x, enemy.hit_box.y);
         }
         batch.end();
     }
