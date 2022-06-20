@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -13,7 +14,10 @@ public class GameScreen implements Screen {
 
     OrthographicCamera camera;
 
+    private Stage stage;
+
     private Player player;
+    private HpBar hpBar;
     private Array<Enemy> enemies;
     private Weapon weapon;
 
@@ -30,8 +34,15 @@ public class GameScreen implements Screen {
 
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
+        stage = new Stage();
+
         player = new Player();
+
+        hpBar = new HpBar(player);
+        stage.addActor(hpBar);
+
         weapon = new Weapon(player);
+
         enemies = new Array<>();
         for (int i = 0; i < 10; i++){ enemies.add(new Enemy());}
     }
@@ -63,7 +74,7 @@ public class GameScreen implements Screen {
 
     public void update(float delta){
         ScreenUtils.clear(0, 0, 0.25f,1);
-
+        player.hp -= 0.2f;
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         for (Enemy enemy : enemies){
@@ -71,15 +82,22 @@ public class GameScreen implements Screen {
         }
         weapon.update(enemies);
 
+        hpBar.update();
+
         inputHandler(delta);
     }
 
     public void draw(){
         player.draw(game.batch);
+
         weapon.draw(game.batch);
+
         for (Enemy enemy : enemies){
             enemy.draw(game.batch);
         }
+
+        stage.draw();
+        stage.act();
     }
 
     public void setGameState(State state){

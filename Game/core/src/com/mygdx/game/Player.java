@@ -6,11 +6,15 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 public class Player extends Body{
 
     private float movementSpeed;
+    public float hp;
+    public int hpMax;
 
     public Player(){
         createBody(0, 0, 64, 64);
         createTextureRegion("player1.png");
         movementSpeed = 240;
+        hpMax = 100;
+        hp = hpMax;
     }
 
     public void moveLeft(OrthographicCamera camera, float delta){
