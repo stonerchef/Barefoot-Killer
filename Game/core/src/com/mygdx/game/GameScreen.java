@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class GameScreen implements Screen {
@@ -13,7 +14,8 @@ public class GameScreen implements Screen {
     OrthographicCamera camera;
 
     private Player player;
-    private Enemy enemy;
+    private Array<Enemy> enemies;
+    private Weapon weapon;
 
     public enum State{
         PAUSE,
@@ -29,7 +31,9 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         player = new Player();
-        enemy = new Enemy();
+        weapon = new Weapon(player);
+        enemies = new Array<>();
+        for (int i = 0; i < 10; i++){ enemies.add(new Enemy());}
     }
 
     @Override
@@ -62,15 +66,20 @@ public class GameScreen implements Screen {
 
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
-
-        enemy.update(player);
+        for (Enemy enemy : enemies){
+            enemy.update(player);
+        }
+        weapon.update(enemies);
 
         inputHandler(delta);
     }
 
     public void draw(){
         player.draw(game.batch);
-        enemy.draw(game.batch);
+        weapon.draw(game.batch);
+        for (Enemy enemy : enemies){
+            enemy.draw(game.batch);
+        }
     }
 
     public void setGameState(State state){

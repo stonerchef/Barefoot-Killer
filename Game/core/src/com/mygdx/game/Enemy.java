@@ -14,9 +14,9 @@ public class Enemy extends Body{
     public Enemy() {
         Random randInt = new Random();
         //(float)randInt.nextInt(Gdx.graphics.getWidth() * 2 ) - Gdx.graphics.getWidth() / 2,
-                //(float)randInt.nextInt(Gdx.graphics.getHeight() * 2 ) - Gdx.graphics.getHeight() / 2,
-        createBody(0, 0, 64, 64);
-        movementSpeedPreSec = 120;
+        // (float)randInt.nextInt(Gdx.graphics.getHeight() * 2 ) - Gdx.graphics.getHeight() / 2,
+        createBody((float)randInt.nextInt(1000) - 500, (float)randInt.nextInt(1000) - 500, 64, 64);
+        movementSpeedPreSec = 60;
         createTextureRegion("player.png");
     }
 
