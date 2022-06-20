@@ -14,7 +14,7 @@ public class Weapon extends Body{
     public Weapon(Player p){
         player = p;
         createBody(player.getX(), player.getX(), 64, 128);
-        createTextureRegion("gun.png");
+        createTextureRegion("sword.png");
         target = new Enemy();
     }
     public Enemy getTarget(Array<Enemy> Targets){
@@ -44,7 +44,7 @@ public class Weapon extends Body{
             angle = calculateAngle();
         }
     }
-    @Override//to trzeba naprawić
+    @Override
     public void draw(SpriteBatch batch){
         super.draw(batch, getX(), getY(), getWidth() / 2, getHeight() / 2  ,
                 getWidth(), getHeight(), 1, 1, calculateAngle());
