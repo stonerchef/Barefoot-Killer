@@ -42,11 +42,11 @@ public abstract class Body {
         body.height = x;
     }
 
-    public void creatTextureRegion(String imagePath){
+    public void createTextureRegion(String imagePath){
         textureRegion = new TextureRegion(new Texture(imagePath));
     }
 
-    public void creatBody(){
+    public void createBody(){
         body = new Rectangle();
     }
 

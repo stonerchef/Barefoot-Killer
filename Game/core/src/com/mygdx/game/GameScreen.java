@@ -13,7 +13,7 @@ public class GameScreen implements Screen {
     OrthographicCamera camera;
 
     private Player player;
-    private Player test;
+    private Enemy enemy;
 
     public enum State{
         PAUSE,
@@ -29,7 +29,7 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         player = new Player();
-        test = new Player();
+        enemy = new Enemy();
     }
 
     @Override
@@ -63,12 +63,14 @@ public class GameScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
+        enemy.update(player);
+
         inputHandler(delta);
     }
 
     public void draw(){
         player.draw(game.batch);
-        test.draw(game.batch);
+        enemy.draw(game.batch);
     }
 
     public void setGameState(State state){

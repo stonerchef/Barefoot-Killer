@@ -9,7 +9,7 @@ public class Player extends Body{
 
     public Player(){
         createBody(0, 0, 64, 64);
-        creatTextureRegion("player1.png");
+        createTextureRegion("player1.png");
         movementSpeed = 240;
     }
 
